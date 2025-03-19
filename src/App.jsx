@@ -1,33 +1,28 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
+import Error404 from './pages/Error404.jsx';
+import Layout from './layouts/Layout.jsx';
+import Login from './pages/Login.jsx';
+import Registro from './pages/Registro.jsx';
+import Juego from './pages/Juego.jsx';
+import OlvideMiContraseña from './pages/OlvideMiContraseña.jsx';
+import Home from './pages/Home.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/juegos/:idJuego" element={<Juego />} />
+        </Route>
+        <Route path="*" element={<Error404 />} />
+        <Route path="/juegos" element={<Navigate to="/" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/olvide-mi-contraseña" element={<OlvideMiContraseña />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
