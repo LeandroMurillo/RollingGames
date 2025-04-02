@@ -1,29 +1,51 @@
-import { useState } from 'react';
-import reactLogo from '../assets/react.svg';
-import viteLogo from '/vite.svg';
-import '../Home.css';
+import React, { useContext } from 'react';
+import { JuegosContext } from '../JuegosContext';
+import { Container, Spinner, Alert } from 'react-bootstrap';
+import GameStack from '../components/GameStack';
 
-export default function Home() {
-  const [count, setCount] = useState(0);
+const Home = () => {
+  const { juegos, loading, error } = useContext(JuegosContext);
+
+  if (loading) {
+    return (
+      <Container className="my-4 text-center">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="my-4">
+        <Alert variant="danger">Error: {error}</Alert>
+      </Container>
+    );
+  }
+
+  // Agrupamos los juegos por cada género, filtrando duplicados en cada categoría
+  const genreGroups = {};
+  juegos.forEach((game) => {
+    if (game.genres && game.genres.length > 0) {
+      game.genres.forEach((genre) => {
+        const genreName = genre.name;
+        if (!genreGroups[genreName]) {
+          genreGroups[genreName] = [];
+        }
+        // Agregar el juego solo si no está ya presente en la categoría
+        if (!genreGroups[genreName].some((g) => g.id === game.id)) {
+          genreGroups[genreName].push(game);
+        }
+      });
+    }
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <Container className="mt-3">
+      {Object.keys(genreGroups).map((genreName) => (
+        <GameStack key={genreName} title={genreName} games={genreGroups[genreName]} />
+      ))}
+    </Container>
   );
-}
+};
+
+export default Home;
