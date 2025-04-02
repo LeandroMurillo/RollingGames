@@ -1,7 +1,38 @@
 export default function Footer() {
   return (
-    <div className="bg-primary position-absolute bottom-0 start-50">
-      <p>Footer Funciona!</p>
-    </div>
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-section">
+          <h3>rollingGames</h3>
+          <p>Tu destino para los mejores videojuegos.</p>
+        </div>
+        <div className="footer-section">
+          <h3>Enlaces</h3>
+          <ul>
+            <li>
+              <a href="soporte">Soporte</a>
+            </li>
+            <li>
+              <a href="terminos">Términos</a>
+            </li>
+            <li>
+              <a href="privacidad">Privacidad</a>
+            </li>
+          </ul>
+        </div>
+        <div className="footer-section">
+          <h3>Contacto</h3>
+          <p>
+            Email: <span className="highlight">soporte@rollingGames.com</span>
+          </p>
+          <p>
+            Tel: <span className="highlight">+54 11 1234-5678</span>
+          </p>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>© 2025 rollingGames. Todos los derechos reservados.</p>
+      </div>
+    </footer>
   );
 }
