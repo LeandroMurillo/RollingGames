@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { JuegosContext } from '../JuegosContext';
 
 const Juego = () => {
+  // Ahora se extrae correctamente "slugJuego" de la URL
   const { slugJuego } = useParams();
   const { fetchGameDetail } = useContext(JuegosContext);
 
@@ -60,7 +61,6 @@ const Juego = () => {
 
   return (
     <Container className="my-4 bg-dark text-light">
-      {/* Ajustamos la Card para que también sea oscura */}
       <Card className="bg-dark text-light border-0">
         <Card.Header className="bg-dark text-light border-bottom border-secondary">
           <h2>{gameDetail.name}</h2>
@@ -88,7 +88,6 @@ const Juego = () => {
               )}
             </Col>
             <Col md={4} xs={12} className="mt-3 mt-md-0">
-              {/* Caja de precio con fondo ligeramente diferente */}
               <div className="p-3 border border-secondary rounded bg-dark text-light">
                 <h4 className="text-center">Precio</h4>
                 <p className="display-6 text-center">{gameDetail.price}</p>

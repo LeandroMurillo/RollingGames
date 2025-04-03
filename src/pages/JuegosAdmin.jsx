@@ -83,26 +83,25 @@ const JuegosAdmin = () => {
 
   return (
     <Container className="my-4">
-      <h2>Tablero de Juegos</h2>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Slug</th>
-            <th>Géneros</th>
-            <th>Rating</th>
-            <th>Fecha de Lanzamiento</th>
-            <th>Descripción</th>
-            <th>Precio</th>
+            <th className="text-center">ID</th>
+            <th className="text-center">Imagen</th>
+            <th className="text-center">Nombre</th>
+            <th className="text-center">Slug</th>
+            <th className="text-center">Géneros</th>
+            <th className="text-center">Rating</th>
+            <th className="text-center">Fecha de Lanzamiento</th>
+            <th className="text-center">Descripción</th>
+            <th className="text-center">Precio</th>
           </tr>
         </thead>
         <tbody>
           {juegos.map((juego) => (
             <tr key={juego.id}>
-              <td>{juego.id}</td>
-              <td>
+              <td className="text-center">{juego.id}</td>
+              <td className="text-center">
                 {juego.background_image ? (
                   <Image
                     src={juego.background_image}
@@ -114,27 +113,26 @@ const JuegosAdmin = () => {
                   'Sin imagen'
                 )}
               </td>
-              <td>{juego.name}</td>
-              <td>{juego.slug}</td>
-              <td>
+              <td className="text-center">{juego.name}</td>
+              <td className="text-center">{juego.slug}</td>
+              <td className="text-center">
                 {juego.genres && juego.genres.length > 0
                   ? juego.genres.map((g) => g.name).join(', ')
                   : 'Sin género'}
               </td>
-              <td>{juego.rating}</td>
-              <td>{juego.released}</td>
-              <td>
-                {/* Sólo se muestra el botón para editar la descripción */}
+              <td className="text-center">{juego.rating}</td>
+              <td className="text-center">{juego.released}</td>
+              <td className="text-center">
                 <Button variant="warning" size="sm" onClick={() => handleEditGame(juego)}>
                   Editar
                 </Button>
               </td>
-              <td>
+              <td className="text-center">
                 <Form.Control
                   type="text"
                   value={juego.price}
                   onChange={(e) => handlePriceChange(juego.id, e.target.value)}
-                  style={{ maxWidth: '120px' }}
+                  style={{ maxWidth: '120px', margin: '0 auto' }}
                 />
               </td>
             </tr>

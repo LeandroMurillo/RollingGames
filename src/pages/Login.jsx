@@ -9,8 +9,7 @@ export default function Login() {
   const [alertMsg, setAlertMsg] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { usuarios, setUsuarioLogueado, actualizarUltimoAccesoYUsuarioLogueado } =
-    useContext(UserContext);
+  const { usuarios, setUsuarioLogueado, actualizarUltimoAcceso } = useContext(UserContext);
 
   useEffect(() => {
     // Si se pasó la bandera del registro, mostramos el mensaje de agradecimiento.
@@ -40,16 +39,10 @@ export default function Login() {
 
       if (userCandidate) {
         if (userCandidate.estado === 'Aprobado') {
-          // Usuario aprobado: actualizamos el último acceso y asignamos el usuario logueado
-          const foundIndex = usuarios.findIndex(
-            (user) =>
-              user.correo === email && user.password === password && user.estado === 'Aprobado'
-          );
-          actualizarUltimoAccesoYUsuarioLogueado(foundIndex);
-          const updatedUser = {
-            ...usuarios[foundIndex],
-            ultimoAcceso: new Date().toLocaleString()
-          };
+          // Usuario aprobado: actualizamos el último acceso usando el id y asignamos el usuario logueado
+          const newAccessTime = new Date().toLocaleString();
+          actualizarUltimoAcceso(userCandidate.id);
+          const updatedUser = { ...userCandidate, ultimoAcceso: newAccessTime };
           setUsuarioLogueado(updatedUser);
           setAlertMsg({ message: 'Inicio de sesión correcto', variant: 'success' });
           if (updatedUser.usuario === 'root') {

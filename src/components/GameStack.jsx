@@ -13,6 +13,29 @@ const useWindowWidth = () => {
   return width;
 };
 
+// Componente para la imagen del juego con efecto hover
+const GameImage = ({ src, alt }) => {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fluid
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        borderRadius: '12px',
+        transition: 'transform 0.3s ease-in-out',
+        transform: hover ? 'scale(1.1)' : 'scale(1)'
+      }}
+    />
+  );
+};
+
 const GameStack = ({ title, games }) => {
   const windowWidth = useWindowWidth();
   const totalGames = games.length;
@@ -85,18 +108,7 @@ const GameStack = ({ title, games }) => {
                       overflow: 'hidden',
                       borderRadius: '12px'
                     }}>
-                    <Image
-                      src={game.background_image}
-                      alt={game.name}
-                      fluid
-                      className="game-image"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '12px'
-                      }}
-                    />
+                    <GameImage src={game.background_image} alt={game.name} />
                     <div
                       style={{
                         position: 'absolute',

@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>rollingGames</h3>
+          <h3>RollingGames</h3>
           <p>Tu destino para los mejores videojuegos.</p>
         </div>
         <div className="footer-section">
@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="footer-section">
           <h3>Contacto</h3>
           <p>
-            Email: <span className="highlight">soporte@rollingGames.com</span>
+            Email: <span className="highlight">soporte@rollinggames.com</span>
           </p>
           <p>
             Tel: <span className="highlight">+54 11 1234-5678</span>
@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2025 rollingGames. Todos los derechos reservados.</p>
+        <p>© 2025 RollingGames. Todos los derechos reservados.</p>
       </div>
     </footer>
   );

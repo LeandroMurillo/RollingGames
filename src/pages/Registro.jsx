@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Image, Alert } from 'react-bootstrap';
+import React, { useState, useContext } from 'react';
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext.jsx';
 
 export default function Registro() {
   const [nombre, setNombre] = useState('');
@@ -11,18 +12,49 @@ export default function Registro() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
+  const { registrarUsuario } = useContext(UserContext);
 
-  // Ruta a la foto de perfil por defecto
-  const defaultProfilePic = 'https://picsum.photos/100';
+  // Ruta a la foto de perfil por defecto ubicada en la carpeta public
+  // Asegúrate de que el nombre y la extensión coincidan con el archivo en public
+  const defaultProfilePic = '/defaultProfilePic.png';
   // Estado inicial del usuario
   const estado = 'Pendiente';
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validar que las contraseñas coincidan
+    // Validación: no se aceptan campos vacíos
+    if (
+      !nombre.trim() ||
+      !apellido.trim() ||
+      !usuario.trim() ||
+      !correo.trim() ||
+      !password.trim() ||
+      !confirmPassword.trim()
+    ) {
+      setAlert({
+        message: 'Todos los campos son obligatorios. Por favor, completa la información.',
+        variant: 'danger'
+      });
+      return;
+    }
+
+    // Validación: correo electrónico válido
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+      setAlert({
+        message: 'Por favor, ingresa un correo electrónico válido.',
+        variant: 'danger'
+      });
+      return;
+    }
+
+    // Validación: las contraseñas deben coincidir
     if (password !== confirmPassword) {
-      setAlert({ message: 'Las contraseñas no coinciden. Inténtalo de nuevo.', variant: 'danger' });
+      setAlert({
+        message: 'Las contraseñas no coinciden. Inténtalo de nuevo.',
+        variant: 'danger'
+      });
       return;
     }
 
@@ -37,25 +69,10 @@ export default function Registro() {
       ultimoAcceso: '-'
     };
 
-    // Obtener el arreglo de usuarios existente en localStorage
-    const storedUsersString = localStorage.getItem('usuarios');
-    let usuariosArray = [];
-    if (storedUsersString) {
-      try {
-        usuariosArray = JSON.parse(storedUsersString);
-        if (!Array.isArray(usuariosArray)) {
-          usuariosArray = [];
-        }
-      } catch (error) {
-        usuariosArray = [];
-      }
-    }
-    // Agregar el nuevo usuario al arreglo existente
-    usuariosArray.push(nuevoUsuario);
-    // Guardar el arreglo actualizado en localStorage
-    localStorage.setItem('usuarios', JSON.stringify(usuariosArray));
+    // Registra el usuario usando el contexto (se asignará un id único si no se proporciona)
+    registrarUsuario(nuevoUsuario);
 
-    // Redirigir a /login y pasar una bandera en el estado para mostrar el mensaje
+    // Redirige a /login y pasa una bandera en el estado para mostrar el mensaje de agradecimiento
     navigate('/login', { state: { mensajeRegistro: true } });
   };
 
