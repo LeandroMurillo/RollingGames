@@ -1,0 +1,103 @@
+/* theme.css */
+
+/* Variables de la paleta de colores de Bootstrap adaptadas a un tema oscuro */
+:root {
+  /* Paleta de colores */
+  --bs-primary: #007bff; /* Azul vibrante para acciones importantes */
+  --bs-secondary: #6c757d; /* Gris medio para elementos secundarios */
+  --bs-success: #28a745; /* Verde para mensajes de éxito */
+  --bs-info: #17a2b8; /* Azul claro para información */
+  --bs-warning: #ffc107; /* Amarillo para advertencias */
+  --bs-danger: #dc3545; /* Rojo para errores o alertas */
+  --bs-light: #f8f9fa; /* Fondo claro, usado en componentes */
+  --bs-dark: #343a40; /* Color oscuro para elementos destacados */
+
+  /* Estilos globales */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Configuración del tema oscuro */
+  color-scheme: dark;
+  color: #ffffff; /* Texto en blanco */
+  background-color: #121212; /* Fondo global oscuro */
+}
+
+/* Asegura que el html y body ocupen toda la pantalla y tengan fondo oscuro */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+}
+
+/* Enlaces */
+a {
+  font-weight: 500;
+  color: var(--bs-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Botones personalizados */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--bs-primary);
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: #ffffff;
+}
+button:hover {
+  border-color: var(--bs-secondary);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Clases de utilidad para el tema oscuro */
+.bg-dark {
+  background-color: #121212 !important;
+}
+.text-light {
+  color: #ffffff !important;
+}
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+.bg-secondary {
+  background-color: var(--bs-secondary) !important;
+}
+.bg-danger {
+  background-color: var(--bs-danger) !important;
+}
+.bg-info {
+  background-color: var(--bs-info) !important;
+}
+.bg-warning {
+  background-color: var(--bs-warning) !important;
+}
+
+/* Si utilizas contenedores fluidos */
+.container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Efecto de zoom al pasar el mouse sobre la imagen */
+.game-image {
+  transition: transform 0.3s ease;
+}
+
+.game-image:hover {
+  transform: scale(1.1);
+}

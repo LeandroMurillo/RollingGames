@@ -1,0 +1,253 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1b2838;
+    color: #c7d5e0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #171a21;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-logo a {
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.navbar-logo a:hover {
+    transform: scale(1.05);
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-menu li {
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar-menu a {
+    color: #c7d5e0;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.navbar-menu a:hover {
+    color: #66c0f4;
+    transform: translateY(-2px);
+}
+
+.navbar-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #66c0f4;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.navbar-menu a:hover::after {
+    width: 100%;
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.navbar-search input {
+    padding: 8px;
+    border: none;
+    border-radius: 3px 0 0 3px;
+    background-color: #316282;
+    color: #fff;
+    transition: width 0.3s ease;
+}
+
+.navbar-search input:focus {
+    width: 200px;
+    outline: none;
+}
+
+.navbar-search button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #66c0f4;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0 3px 3px 0;
+    transition: background-color 0.3s;
+}
+
+.navbar-search button:hover {
+    background-color: #468bb7;
+}
+
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.navbar-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Footer */
+.footer {
+    background-color: #171a21;
+    padding: 40px 20px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-section {
+    margin: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.footer-section:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.footer-section:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-section h3 {
+    color: #66c0f4;
+    margin-bottom: 10px;
+}
+
+.footer-section p, .footer-section a {
+    color: #c7d5e0;
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section a {
+    text-decoration: none;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.footer-section a:hover {
+    color: #66c0f4;
+    padding-left: 5px;
+}
+
+.highlight {
+    color: #66c0f4;
+    transition: color 0.3s;
+}
+
+.highlight:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #2a3f5a;
+    margin-top: 20px;
+}
+
+/* Search Result */
+.search-result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #2a3f5a;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #171a21;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .navbar-menu li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-search input:focus {
+        width: 150px;
+    }
+}
